@@ -28,23 +28,25 @@ CREATE TABLE role (
 );
 
 INSERT INTO role (id, title, salary, department_id)
-VALUES (23, "Server", 40000, 1);
+VALUES (23, "Server", 40000, 001);
 
-INSERT INTO role (title, salary, department_id)
-VALUES (24, "Bartender", 60000, 1);
+INSERT INTO role (id, title, salary, department_id)
+VALUES (24, "Bartender", 60000, 001);
 
-INSERT INTO role (title, salary, department_id)
-VALUES (25, "Host", 24000, 1);
+INSERT INTO role (id, title, salary, department_id)
+VALUES (25, "Host", 24000, 001);
 
-INSERT INTO role (title, salary, department_id)
-VALUES (26, "Line Cook", 24000, 2);
+INSERT INTO role (id, title, salary, department_id)
+VALUES (26, "Line Cook", 24000, 002);
 
-INSERT INTO role (title, salary, department_id)
-VALUES (27, "Dish Washer", 24000, 2);
+INSERT INTO role (id, title, salary, department_id)
+VALUES (27, "Dish Washer", 24000, 002);
 
-INSERT INTO role (title, salary, department_id)
-VALUES (2, "Manager", 100000, 3);
+INSERT INTO role (id, title, salary, department_id)
+VALUES (2, "Manager", 83000, 003);
 
+INSERT INTO role (id, title, salary, department_id)
+VALUES (1, "General Manager", 100000, 003);
 
 
 CREATE TABLE employee (
@@ -56,8 +58,8 @@ CREATE TABLE employee (
   PRIMARY KEY (id)
 );
 
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ("Jason", "Weaver", );
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Jason", "Weaver", 23,  );
 
 INSERT INTO employee (first_name, last_name, role_id)
 VALUES ("Carey", "Wayne", );
@@ -115,3 +117,25 @@ VALUES ("Jennifer", "London", );
 
 INSERT INTO employee (first_name, last_name, manager_id)
 VALUES ("Linda", "Grey", );
+
+CREATE TABLE manager (
+  id INT PRIMARY KEY,
+  first_name VARCHAR(20) NOT NULL,
+  last_name VARCHAR(20) NOT NULL,
+  role_id INT NOT NULL,
+  manager_id INT NULL,
+  PRIMARY KEY (id)
+);
+
+
+INSERT INTO manager (id, first_name, last_name, role_id)
+VALUES (100, "Jesus", "Cristo", 1 );
+
+INSERT INTO manager (2, first_name, last_name, role_id, manager_id)
+VALUES (110, "Jessie", "James", 2);
+
+INSERT INTO manager (first_name, last_name, role_id, manager_id)
+VALUES (120, "Jennifer", "London", 2);
+
+INSERT INTO manager (first_name, last_name, role_id, manager_id)
+VALUES (130, "Linda", "Grey", 2);
