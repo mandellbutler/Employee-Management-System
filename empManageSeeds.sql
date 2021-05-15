@@ -6,46 +6,44 @@ USE employeeManagement_db;
 
 
 CREATE TABLE department (
-  id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id)
+  id INT PRIMARY KEY,
+  name VARCHAR(20) NOT NULL
 );
 
 INSERT INTO department (name)
-VALUES ("Front of House");
+VALUES (1, "Front of House");
 
 INSERT INTO department (name)
-VALUES ("Back of House");
+VALUES (2, "Back of House");
 
 INSERT INTO department (name)
-VALUES ("Admin");
+VALUES (3, "Admin");
 
 
 CREATE TABLE role (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT PRIMARY KEY,
   title VARCHAR(20) NOT NULL,
   salary DECIMAL (10,2) NOT NULL,
   department_id INT NOT NULL,
-  PRIMARY KEY (id)
 );
 
-INSERT INTO role (title, salary, department_id)
-VALUES ("Server", 40000, );
+INSERT INTO role (id, title, salary, department_id)
+VALUES (23, "Server", 40000, 1);
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("Bartender", 60000);
+VALUES (24, "Bartender", 60000, 1);
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("Host", 24000);
+VALUES (25, "Host", 24000, 1);
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("Line Cook", 24000);
+VALUES (26, "Line Cook", 24000, 2);
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("Dish Washer", 24000);
+VALUES (27, "Dish Washer", 24000, 2);
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("Manager", 100000);
+VALUES (2, "Manager", 100000, 3);
 
 
 
@@ -54,7 +52,7 @@ CREATE TABLE employee (
   first_name VARCHAR(20) NOT NULL,
   last_name VARCHAR(20) NOT NULL,
   role_id INT NOT NULL,
-  manager_id INT NOT NULL,
+  manager_id INT NULL,
   PRIMARY KEY (id)
 );
 
