@@ -7,16 +7,16 @@ USE employeeManagement_db;
 
 CREATE TABLE department (
   id INT PRIMARY KEY,
-  name VARCHAR(20) NOT NULL
+  dept_name VARCHAR(20) NOT NULL
 );
 
-INSERT INTO department (name)
+INSERT INTO department (id, dept_name)
 VALUES (100, "Front of House");
 
-INSERT INTO department (name)
+INSERT INTO department (id, dept_name)
 VALUES (200, "Back of House");
 
-INSERT INTO department (name)
+INSERT INTO department (id, dept_name)
 VALUES (300, "Admin");
 
 
@@ -147,8 +147,7 @@ CREATE TABLE manager (
   first_name VARCHAR(20) NOT NULL,
   last_name VARCHAR(20) NOT NULL,
   role_id INT NOT NULL,
-  manager_id INT NULL,
-  PRIMARY KEY (id)
+  manager_id INT NULL
 );
 
 INSERT INTO manager (id, first_name, last_name, role_id)
