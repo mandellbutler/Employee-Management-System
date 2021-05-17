@@ -2,59 +2,43 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-
-//creates connection with mysql server
-const connection = mysql.createConnection({
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: '#ClassPass',
-  database: 'employeeManagement_db',
-});
+const connection = require('./config/connection.js');
 
 
 //read functions==================================================
-const readEmployees = () => {
-  connection.query('SELECT * FROM employees', (err, res) => {
-    if (err) throw err;
-    console.log(res);
-    connection.end()
-  });
-};
+// const readDepartments = () => {
+//     connection.query('SELECT * FROM departments', (err, res) => {
+//       if (err) throw err;
+//       console.log(res);
+//       connection.end()
+//     });
+// };
 
-const readDepartments = () => {
-    connection.query('SELECT * FROM departments', (err, res) => {
-      if (err) throw err;
-      console.log(res);
-      connection.end()
-    });
-};
+// const readRoles = () => {
+//     connection.query('SELECT * FROM roles', (err, res) => {
+//       if (err) throw err;
+//       console.log(res);
+//       connection.end()
+//     });
+// };
 
-const readRoles = () => {
-    connection.query('SELECT * FROM roles', (err, res) => {
-      if (err) throw err;
-      console.log(res);
-      connection.end()
-    });
-};
+// const readEmployees = () => {
+//   connection.query('SELECT * FROM employees', (err, res) => {
+//     if (err) throw err;
+//     console.log(res);
+//     connection.end()
+//   });
+// };
 
-const readManagers = () => {
-  connection.query('SELECT * FROM managers', (err, res) => {
-    if (err) throw err;
-    console.log(res);
-    connection.end()
-  });
-};
+// const readManagers = () => {
+//   connection.query('SELECT * FROM managers', (err, res) => {
+//     if (err) throw err;
+//     console.log(res);
+//     connection.end()
+//   });
+// };
 
-//confirm that connection has been established
-connection.connect((err) => {
-  if (err) throw err;
-  console.log(`connected as id ${connection.threadId}`);
-  readDepartments();
-  readRoles();
-  readEmployees();
-  readManagers();
-});
+
 
 
 //============C.R.U.D
