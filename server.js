@@ -1,8 +1,9 @@
+//DEPENDENCIES====================================================
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 
-
+//creates connection with mysql server
 const connection = mysql.createConnection({
   host: 'localhost',
   port: 3306,
@@ -11,23 +12,25 @@ const connection = mysql.createConnection({
   database: 'employeeManagement_db',
 });
 
-const afterConnection = () => {
-  connection.query('SELECT * FROM employee', (err, res) => {
+
+//read functions==================================================
+const readEmployees = () => {
+  connection.query('SELECT * FROM employees', (err, res) => {
     if (err) throw err;
     console.log(res);
     connection.end()
   });
 };
 
-const displayDeptTb = () => {
-    connection.query('SELECT * FROM department', (err, res) => {
+const readDepartments = () => {
+    connection.query('SELECT * FROM departments', (err, res) => {
       if (err) throw err;
       console.log(res);
       connection.end()
     });
 };
 
-const displayRolesTb = () => {
+const readRoles = () => {
     connection.query('SELECT * FROM roles', (err, res) => {
       if (err) throw err;
       console.log(res);
@@ -35,12 +38,22 @@ const displayRolesTb = () => {
     });
 };
 
+const readManagers = () => {
+  connection.query('SELECT * FROM managers', (err, res) => {
+    if (err) throw err;
+    console.log(res);
+    connection.end()
+  });
+};
+
+//confirm that connection has been established
 connection.connect((err) => {
   if (err) throw err;
   console.log(`connected as id ${connection.threadId}`);
-  afterConnection();
-  displayDeptTb();
-  displayRolesTb();
+  readDepartments();
+  readRoles();
+  readEmployees();
+  readManagers();
 });
 
 
