@@ -4,8 +4,6 @@ VALUES
 ("Back of House"),
 ("Admin");
 
-
-
 INSERT INTO roles (title, salary, department_id)
 VALUES
 ("Server", 40000, 1),
