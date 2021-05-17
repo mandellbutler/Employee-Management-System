@@ -1,30 +1,11 @@
 DROP DATABASE IF EXISTS employeeManagement_db;
-
-CREATE DATABASE employeeManagement_db;
-
-USE employeeManagement_db;
-
-
-CREATE TABLE department (
-  id INT PRIMARY KEY,
-  dept_name VARCHAR(20) NOT NULL
-);
-
-INSERT INTO department (id, dept_name)
+INSERT INTO departments (id, dept_name)
 VALUES 
 (100, "Front of House"),
 (200, "Back of House"),
 (300, "Admin");
 
-
-CREATE TABLE role (
-  id INT PRIMARY KEY,
-  title VARCHAR(20) NOT NULL,
-  salary DECIMAL (10,2) NOT NULL,
-  department_id INT NOT NULL,
-);
-
-INSERT INTO role (id, title, salary, department_id)
+INSERT INTO roles (id, title, salary, department_id)
 VALUES
 (11, "Server", 40000, 100),
 (12, "Bartender", 60000, 100),
@@ -34,17 +15,7 @@ VALUES
 (31, "Manager", 83000, 300),
 (32, "General Manager", 100000, 300);
 
-
-CREATE TABLE employee (
-  id INT NOT NULL AUTO_INCREMENT,
-  first_name VARCHAR(20) NOT NULL,
-  last_name VARCHAR(20) NOT NULL,
-  role_id INT NOT NULL,
-  manager_id INT NULL,
-  PRIMARY KEY (id)
-);
-
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES 
 ("Jason", "Weaver", 11, 311),
 ("Jose", "Garcia", 22, 320),
@@ -75,15 +46,7 @@ VALUES
 ("Weazy", "Jefferson", 21, 320),
 ("Daphne", "Greene", 11, 311);
 
-CREATE TABLE manager (
-  id INT PRIMARY KEY,
-  first_name VARCHAR(20) NOT NULL,
-  last_name VARCHAR(20) NOT NULL,
-  role_id INT NOT NULL,
-  manager_id INT NULL
-);
-
-INSERT INTO manager (id, first_name, last_name, role_id, manager_id)
+INSERT INTO managers (id, first_name, last_name, role_id, manager_id)
 VALUES 
 (300, "Jesus", "Cristo", 32, NULL),
 (311, "Jessie", "James", 31, 300),
