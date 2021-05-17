@@ -6,29 +6,32 @@ const connection = require('./config/connection.js');
 
 
 //read functions==================================================
-// const readDepartments = () => {
-//     connection.query('SELECT * FROM departments', (err, res) => {
-//       if (err) throw err;
-//       console.log(res);
-//       connection.end()
-//     });
-// };
+const readDepartments = () => {
+    connection.query('SELECT * FROM departments', (err, res) => {
+      if (err) throw err;
+      console.log(res);
+      // connection.end()
+    });
+};
+readDepartments();
 
-// const readRoles = () => {
-//     connection.query('SELECT * FROM roles', (err, res) => {
-//       if (err) throw err;
-//       console.log(res);
-//       connection.end()
-//     });
-// };
+const readRoles = () => {
+    connection.query('SELECT * FROM roles', (err, res) => {
+      if (err) throw err;
+      console.log(res);
+      // connection.end()
+    });
+};
+readRoles();
 
-// const readEmployees = () => {
-//   connection.query('SELECT * FROM employees', (err, res) => {
-//     if (err) throw err;
-//     console.log(res);
-//     connection.end()
-//   });
-// };
+const readEmployees = () => {
+  connection.query('SELECT * FROM employees', (err, res) => {
+    if (err) throw err;
+    console.log(res);
+    connection.end()
+  });
+};
+readEmployees();
 
 // const readManagers = () => {
 //   connection.query('SELECT * FROM managers', (err, res) => {
