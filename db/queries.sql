@@ -15,3 +15,11 @@ SELECT first_name, last_name, title FROM employees RIGHT JOIN roles ON employees
 SELECT first_name, last_name, title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "genral manager";
 
 -----------------------Search Employees by Department
+
+
+
+-----------------------Search Employees by Manager
+SELECT employees.first_name AS FirstName, employees.last_name AS LastName, roles.title AS Role, managers.first_name AS Manager
+FROM employees RIGHT JOIN roles ON employees.role_id = role_id
+JOIN employees managers ON employees.manager_id = managers.id
+WHERE employees.manager_id = 2;
