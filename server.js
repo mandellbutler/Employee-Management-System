@@ -3,20 +3,39 @@ const mysql = require('mysql');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const connection = require('./config/connection.js');
+const Choices = require('inquirer/lib/objects/choices');
 
 //upon app initialization
-//user is presented with an 'Ascee' start/welcome screen
+const startApp = () => {
+  //user is presented with an 'Ascee' start/welcome screen
     //the user is presented with a series of prompts:
-        //What would you like to do? 
+  inquirer
+  .prompt ({
+      //What would you like to do?
+      name: "userOptions",
+      type: "list",
+      message: "What would you like to do?",
+      choices: ["View All Employees", "View All Employees By Department", "View All Employees By Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "Exit"]
+
+  })
+  .then((answer) => {
+    //switch case to determine next prompts or actions based on selected response
+  })
+}
+
+         
             //userOptions
             //list
             //Choices:
                       //====CASE======//
                 //View All Employees
+
                       //====CASE======//
                 //View All Employees By Department
+
                       //====CASE======//
                 //View All Employees By Manager
+
                       //====CASE======//
                 //Add Employee
                     //What is the Employee's First Name?
@@ -31,6 +50,7 @@ const connection = require('./config/connection.js');
                         //Choices:
                             //User is Presented With List of ALL ROLES
                             //Manager, deptartment, and salary are assigned based on ROLE choice
+
                       //====CASE======//
                 //Remove Employee
                     //Which Employee would you like to remove?
@@ -38,6 +58,7 @@ const connection = require('./config/connection.js');
                         //List
                         //Choices:
                             //generate list of ALL EMPLOYEES
+
                       //====CASE======//
                 //Update Employee Role
                     //Which Employee file would you like to update?
@@ -50,6 +71,7 @@ const connection = require('./config/connection.js');
                         //List
                         //Choices:
                             //generate list of ALL ROLES
+                            
                       //====CASE======// 
                 //Update Employee Manager
                     //Which Employee file would you like to update?
@@ -61,7 +83,14 @@ const connection = require('./config/connection.js');
                         //uodateManager
                         //List
                         //Choices:
-                            //generate list of ALL MANAGERS 
+                            //generate list of ALL MANAGERS
+
+                      //====CASE======//
+                //Exit
+                    //User exits and the application stops
+//App initialization start()
+//user is presented with an 'Ascee' start/welcome screen
+
 //read functions==================================================
 const readDepartments = () => {
     connection.query('SELECT * FROM departments', (err, res) => {
