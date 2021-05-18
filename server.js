@@ -16,12 +16,38 @@ const startApp = () => {
       type: "list",
       message: "What would you like to do?",
       choices: ["View All Employees", "View All Employees By Department", "View All Employees By Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "Exit"]
-
   })
   .then((answer) => {
     //switch case to determine next prompts or actions based on selected response
+    switch(answer.userOptions) {
+      case "View All Employees":
+        viewEmployees();
+        break;
+      case "View All Employees By Department":
+        viewEmployeesByDept();
+        break;
+      case "View All Employees By Manager":
+        viewEmployeesByManager();
+        break;
+      case "Add Employee":
+        addEmployee();
+        break;
+      case "Remove Employee":
+        removeEmployee();
+        break;
+      case "Update Employee Role":
+        updateRole();
+        break;
+      case "Update Employee Manager":
+        updateManager();
+        break;
+      case "Update Employee Manager":
+        exitApp();
+        break;
+    }
   })
 }
+startApp();
 
          
             //userOptions
