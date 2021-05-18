@@ -1,18 +1,18 @@
 -----------------------Search Employees by Roles
 --Dish Washer-----
-SELECT first_name, last_name, title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "dish washer";
+SELECT first_name AS "First Name", last_name AS "Last Name", title AS Title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "dish washer";
 --Line Cook-------
-SELECT first_name, last_name, title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "line cook";
+SELECT first_name AS "First Name", last_name AS "Last Name", title AS Title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "line cook";
 --Host------------
-SELECT first_name, last_name, title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "host";
+SELECT first_name AS "First Name", last_name AS "Last Name", title AS Title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "host";
 --Server----------
-SELECT first_name, last_name, title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "server";
+SELECT first_name AS "First Name", last_name AS "Last Name", title AS Title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "server";
 --Bartender-------
-SELECT first_name, last_name, title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "bartender";
+SELECT first_name AS "First Name", last_name AS "Last Name", title AS Title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "bartender";
 --Manager---------
-SELECT first_name, last_name, title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "manger";
+SELECT first_name AS "First Name", last_name AS "Last Name", title AS Title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "manger";
 --General Manager-
-SELECT first_name, last_name, title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "genral manager";
+SELECT first_name AS "First Name", last_name AS "Last Name", title AS Title FROM employees RIGHT JOIN roles ON employees.role_id = roles.id WHERE title = "genral manager";
 
 -----------------------Search Employees by Department
 

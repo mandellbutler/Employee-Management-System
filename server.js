@@ -7,7 +7,6 @@ const Choices = require('inquirer/lib/objects/choices');
 
 //upon app initialization
 const startApp = () => {
-  //user is presented with an 'Ascee' start/welcome screen
     //the user is presented with a series of prompts:
   inquirer
   .prompt ({
@@ -15,7 +14,7 @@ const startApp = () => {
       name: "userOptions",
       type: "list",
       message: "What would you like to do?",
-      choices: ["View All Employees", "View All Employees By Department", "View All Employees By Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "Exit"]
+      choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "Exit"]
   })
   .then((answer) => {
     //switch case to determine next prompts or actions based on selected response
@@ -23,11 +22,11 @@ const startApp = () => {
       case "View All Employees":
         viewEmployees();
         break;
-      case "View All Employees By Department":
-        viewEmployeesByDept();
+      case "View All Departments":
+        viewDepartments();
         break;
-      case "View All Employees By Manager":
-        viewEmployeesByManager();
+      case "View All Roles":
+        viewRoles();
         break;
       case "Add Employee":
         addEmployee();
@@ -47,6 +46,7 @@ const startApp = () => {
     }
   })
 }
+//add start app before every break except on exit
 startApp();
 
          
@@ -118,31 +118,34 @@ startApp();
 //user is presented with an 'Ascee' start/welcome screen
 
 //read functions==================================================
-const readDepartments = () => {
-    connection.query('SELECT * FROM departments', (err, res) => {
-      if (err) throw err;
-      console.log(res);
-      // connection.end()
-    });
-};
-readDepartments();
-
-const readRoles = () => {
-    connection.query('SELECT * FROM roles', (err, res) => {
-      if (err) throw err;
-      console.log(res);
-      // connection.end()
-    });
-};
-readRoles();
-
 const viewEmployees = () => {
-  connection.query('SELECT * FROM employees', (err, res) => {
+  connection.query('SELECT first_name AS "First Name", last_name AS "Last Name", role_id AS "Role ID", manager_id AS "Manager ID" FROM employees', (err, res) => {
     if (err) throw err;
     console.log(res);
-    connection.end()
+    console.table("All Employees:", res);
+    startApp();
   });
 };
+
+const viewDepartments = () => {
+  connection.query('SELECT departments.id AS "Dept. ID", dept_name AS "Department" FROM departments', (err, res) => {
+    if (err) throw err;
+    console.log(res);
+    console.table("All Departments:", res);
+    startApp();
+  });
+};
+
+const viewRoles = () => {
+  connection.query('SELECT roles.id AS "Role ID", roles.title AS "Role", roles.salary AS "Salary", roles.department_id AS "Dept. ID" FROM roles', (err, res) => {
+    if (err) throw err;
+    console.log(res);
+    console.table("All Roles:", res);
+    startApp();
+  });
+};
+
+
 
 
 // const readManagers = () => {
