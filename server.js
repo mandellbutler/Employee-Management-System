@@ -4,6 +4,36 @@ const inquirer = require('inquirer');
 const cTable = require('console.table');
 const connection = require('./config/connection.js');
 
+//upon app initialization
+//user is presented with an 'Ascee' start/welcome screen
+    //the user is presented with a series of prompts:
+        //What would you like to do? 
+            //userOptions
+            //list
+            //Choices:
+                      //====CASE======//
+                //View All Employees
+                      //====CASE======//
+                //View All Employees By Department
+                      //====CASE======//
+                //View All Employees By Manager
+                      //====CASE======//
+                //Add Employee
+                    //What is the Employee's First Name?
+                        //Input
+                        //firstName
+                    //What is the Employee's Last Name?
+                        //Input
+                        //lastName
+                    //What is the Employee's Role?
+                        //empRole
+                        //List
+                        //Choices:
+                            //User is Presented With List of ALL ROLES
+                            //Manager, deptartment, and salary are assigned based on ROLE choice
+
+
+
 
 //read functions==================================================
 const readDepartments = () => {
