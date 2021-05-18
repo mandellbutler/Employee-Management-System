@@ -136,14 +136,14 @@ const readRoles = () => {
 };
 readRoles();
 
-const readEmployees = () => {
+const viewEmployees = () => {
   connection.query('SELECT * FROM employees', (err, res) => {
     if (err) throw err;
     console.log(res);
     connection.end()
   });
 };
-readEmployees();
+
 
 // const readManagers = () => {
 //   connection.query('SELECT * FROM managers', (err, res) => {
