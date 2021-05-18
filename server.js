@@ -31,10 +31,37 @@ const connection = require('./config/connection.js');
                         //Choices:
                             //User is Presented With List of ALL ROLES
                             //Manager, deptartment, and salary are assigned based on ROLE choice
-
-
-
-
+                      //====CASE======//
+                //Remove Employee
+                    //Which Employee would you like to remove?
+                        //deleteEmp
+                        //List
+                        //Choices:
+                            //generate list of ALL EMPLOYEES
+                      //====CASE======//
+                //Update Employee Role
+                    //Which Employee file would you like to update?
+                        //empList
+                        //List
+                        //Choices:
+                            //generate list of ALL EMPLOYEES
+                    //What is the Employee's new role?
+                        //updateRole
+                        //List
+                        //Choices:
+                            //generate list of ALL ROLES
+                      //====CASE======// 
+                //Update Employee Manager
+                    //Which Employee file would you like to update?
+                        //empList
+                        //List
+                        //Choices:
+                            //generate list of ALL EMPLOYEES
+                    //Which manager would you like to assign?
+                        //uodateManager
+                        //List
+                        //Choices:
+                            //generate list of ALL MANAGERS 
 //read functions==================================================
 const readDepartments = () => {
     connection.query('SELECT * FROM departments', (err, res) => {
