@@ -14,7 +14,7 @@ const startApp = () => {
       name: "userOptions",
       type: "list",
       message: "What would you like to do?",
-      choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Add Department", "Add Role", "Update Employee Role", "Exit"]
+      choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Add Department", "Add Role", "Update Employee Role", "Remove Employee", "Exit"]
   })
   .then((answer) => {
     //switch case to determine next prompts or actions based on selected response
@@ -38,7 +38,7 @@ const startApp = () => {
         addRole();
         break;
       case "Update Employee Role":
-        updateManager();
+        updateEmployeeRole();
         break;
       case "Remove Employee":
         removeEmployee();
@@ -51,54 +51,6 @@ const startApp = () => {
 }
 //add start app before every break except on exit
 startApp();
-
-                      //====CASE======//
-                //View All Employees By Department
-
-                      //====CASE======//
-                //View All Employees By Manager
-
-                      
-
-                      //====CASE======//
-                //Remove Employee
-                    //Which Employee would you like to remove?
-                        //deleteEmp
-                        //List
-                        //Choices:
-                            //generate list of ALL EMPLOYEES
-
-                      //====CASE======//
-                //Update Employee Role
-                    //Which Employee file would you like to update?
-                        //empList
-                        //List
-                        //Choices:
-                            //generate list of ALL EMPLOYEES
-                    //What is the Employee's new role?
-                        //updateRole
-                        //List
-                        //Choices:
-                            //generate list of ALL ROLES
-                            
-                      //====CASE======// 
-                //Update Employee Manager
-                    //Which Employee file would you like to update?
-                        //empList
-                        //List
-                        //Choices:
-                            //generate list of ALL EMPLOYEES
-                    //Which manager would you like to assign?
-                        //uodateManager
-                        //List
-                        //Choices:
-                            //generate list of ALL MANAGERS
-
-                      //====CASE======//
-                //Exit
-                    //User exits and the application stops
-//App initialization start()
-//user is presented with an 'Ascee' start/welcome screen
 
 //read functions==================================================
 //View All Employees
@@ -130,48 +82,7 @@ const viewRoles = () => {
 };
 
 
-//Create function==================================================
-
-//Add Role
-const addRole = () => {
-  console.log('Adding a new role...\n');
-  //prompt for adding new employee to table
-  inquirer
-    .prompt([
-      {
-        name: "roleTitle",
-        type: "input",
-        message: "What is the new Role's Title?"
-      },
-      {
-        name: "salary",
-        type: "input",
-        message: "What is the Role's salary?"
-      },
-      {
-        name: "deptID",
-        type: "list",
-        message: "Which Department will the new Role belong to?",
-        choices: ["1", "2", "3"]
-      },
-    ])
-    .then((answer) => {
-      connection.query(
-        'INSERT INTO roles SET ?',
-        {
-          title: answer.roleTitle,
-          salary: answer.salary,
-          department_id: answer.deptID,
-        },
-        (err, res) => {
-          if (err) throw err;
-          console.log(`${res.affectedRows} role inserted!\n`);
-          // Call updateEmployee AFTER the INSERT completes
-          startApp();
-        });
-    });  
-};
-
+//CREATE FUNCTIONS==================================================
 
 //Add Employee
 const addEmployee = () => {
@@ -220,6 +131,90 @@ const addEmployee = () => {
     });  
 };
 
+//Add Department
+const addDepartment = () => {
+  console.log('Adding a new department...\n');
+  //prompt for adding new employee to table
+  inquirer
+    .prompt([
+      {
+        name: "departmentName",
+        type: "input",
+        message: "What is the name of the new Department?"
+      }
+    ])
+    .then((answer) => {
+      connection.query(
+        'INSERT INTO departments SET ?',
+        {
+          dept_name: answer.departmentName,
+        },
+        (err, res) => {
+          if (err) throw err;
+          console.log(`${res.affectedRows} department inserted!\n`);
+          // Call updateEmployee AFTER the INSERT completes
+          startApp();
+        });
+    });  
+};
+
+//Add Role
+const addRole = () => {
+  console.log('Adding a new role...\n');
+  //prompt for adding new employee to table
+  inquirer
+    .prompt([
+      {
+        name: "roleTitle",
+        type: "input",
+        message: "What is the new Role's Title?"
+      },
+      {
+        name: "salary",
+        type: "input",
+        message: "What is the Role's salary?"
+      },
+      {
+        name: "deptID",
+        type: "list",
+        message: "Which Department will the new Role belong to?",
+        choices: ["1", "2", "3"]
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        'INSERT INTO roles SET ?',
+        {
+          title: answer.roleTitle,
+          salary: answer.salary,
+          department_id: answer.deptID,
+        },
+        (err, res) => {
+          if (err) throw err;
+          console.log(`${res.affectedRows} role inserted!\n`);
+          // Call updateEmployee AFTER the INSERT completes
+          startApp();
+        });
+    });  
+};
+
+//UPDATE FUNCTIONS======================================
+//Update Employee=========
+
+ //====CASE======//
+                //Update Employee Role
+                    //Which Employee file would you like to update?
+                        //empList
+                        //List
+                        //Choices:
+                            //generate list of ALL EMPLOYEES
+                    //What is the Employee's new role?
+                        //updateRole
+                        //List
+                        //Choices:
+                            //generate list of ALL ROLES
+
+//======================================================
 //TO REVISIT:
 
 //What is the Employee's Role?
@@ -229,67 +224,53 @@ const addEmployee = () => {
             //User is Presented With List of ALL ROLES
             //Manager, deptartment, and salary are assigned based on ROLE choice
 
+const updateEmployeeRole = () => {
+  console.log('Updating Employees Table...\n');
+      const query = connection.query(
+        'UPDATE employee SET ? WHERE ?',
+        [
+          {
+            quantity: 100,
+          },
+          {
+            flavor: 'Rocky Road',
+          },
+        ],
+        (err, res) => {
+          if (err) throw err;
+          console.log(`${res.affectedRows} products updated!\n`);
+          // Call deleteProduct AFTER the UPDATE completes
+          deleteProduct();
+        }
+      );
+    
+      // logs the actual query being run
+      console.log(query.sql);
+};
 
-// const readManagers = () => {
-//   connection.query('SELECT * FROM managers', (err, res) => {
-//     if (err) throw err;
-//     console.log(res);
-//     connection.end()
-//   });
-// };
-
-
-
-
-//============C.R.U.D
-
-
-  
-//   const deleteProduct = () => {
-//     console.log('Deleting all strawberry icecream...\n');
-//     connection.query(
-//       'DELETE FROM products WHERE ?',
-//       {
-//         flavor: 'strawberry',
-//       },
-//       (err, res) => {
-//         if (err) throw err;
-//         console.log(`${res.affectedRows} products deleted!\n`);
-//         // Call readProducts AFTER the DELETE completes
-//         readProducts();
-//       }
-//     );
-//   };
-  
-//   const updateEmployee = () => {
-//     console.log('Updating Employees Table...\n');
-//     const query = connection.query(
-//       'UPDATE employee SET ? WHERE ?',
-//       [
-//         {
-//           quantity: 100,
-//         },
-//         {
-//           flavor: 'Rocky Road',
-//         },
-//       ],
-//       (err, res) => {
-//         if (err) throw err;
-//         console.log(`${res.affectedRows} products updated!\n`);
-//         // Call deleteProduct AFTER the UPDATE completes
-//         deleteProduct();
-//       }
-//     );
-  
-//     // logs the actual query being run
-//     console.log(query.sql);
-//   };
 
   
-//   // Connect to the DB
-//   connection.connect((err) => {
-//     if (err) throw err;
-//     console.log(`connected as id ${connection.threadId}\n`);
-//     createProduct();
-// });
-  
+const removeEmployee = () => {
+  console.log('Saying Bye Bye to your precious Employee...\n');
+    inquirer
+        .prompt([
+          {
+            name: "removeID",
+            type: "input",
+            message: "Please enter the ID of the Employee you would like to remove:"
+          },
+        ])
+        .then((answer) => {
+    connection.query(
+      'DELETE FROM employees WHERE ?',
+      {
+        id: answer.removeID,
+      },
+      (err, res) => {
+        if (err) throw err;
+        console.log(`${res.affectedRows} employee eradicated!\n`);
+        // Call readProducts AFTER the DELETE completes
+        viewEmployees();
+      })
+    });
+};
