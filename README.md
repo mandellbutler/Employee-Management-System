@@ -8,8 +8,8 @@ To install, simply clone the Github repository and add it to your local repo via
 
 # Usage
 This Command line interface allows a user to:
-* Add departments, roles, employees
 * View departments, roles, employees
+* Add departments, roles, employees
 * Remove departments, roles, employees
 * Update employee roles
 
