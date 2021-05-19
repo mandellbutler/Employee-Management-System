@@ -126,6 +126,7 @@ const addEmployee = () => {
           if (err) throw err;
           console.log(`${res.affectedRows} employee inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
+          console.table("Employee Added!", res);
           startApp();
         });
     });  
@@ -153,6 +154,7 @@ const addDepartment = () => {
           if (err) throw err;
           console.log(`${res.affectedRows} department inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
+          console.table("Department Added!", res);
           startApp();
         });
     });  
@@ -193,63 +195,37 @@ const addRole = () => {
           if (err) throw err;
           console.log(`${res.affectedRows} role inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
+          console.table("Role Added!", res);
           startApp();
         });
     });  
 };
 
 //UPDATE FUNCTIONS======================================
-//Update Employee=========
-
- //====CASE======//
-                //Update Employee Role
-                    //Which Employee file would you like to update?
-                        //empList
-                        //List
-                        //Choices:
-                            //generate list of ALL EMPLOYEES
-                    //What is the Employee's new role?
-                        //updateRole
-                        //List
-                        //Choices:
-                            //generate list of ALL ROLES
-
-//======================================================
-//TO REVISIT:
-
-//What is the Employee's Role?
-        //empRole
-        //List
-        //Choices:
-            //User is Presented With List of ALL ROLES
-            //Manager, deptartment, and salary are assigned based on ROLE choice
-
-const updateEmployeeRole = () => {
-  console.log('Updating Employees Table...\n');
-      const query = connection.query(
-        'UPDATE employee SET ? WHERE ?',
-        [
-          {
-            quantity: 100,
-          },
-          {
-            flavor: 'Rocky Road',
-          },
-        ],
-        (err, res) => {
-          if (err) throw err;
-          console.log(`${res.affectedRows} products updated!\n`);
-          // Call deleteProduct AFTER the UPDATE completes
-          deleteProduct();
-        }
-      );
-    
-      // logs the actual query being run
-      console.log(query.sql);
-};
+// const updateEmployeeRole = () => {
+//   console.log('Updating Employees Table...\n');
+//       const query = connection.query(
+//         'UPDATE employee SET ? WHERE ?',
+//         [
+//           {
+//             roleID: 100,
+//           },
+//           {
+//             flavor: 'Rocky Road',
+//           },
+//         ],
+//         (err, res) => {
+//           if (err) throw err;
+//           console.log(`${res.affectedRows} employees updated!\n`);
+//           // Call deleteProduct AFTER the UPDATE completes
+//           deleteProduct();
+//         }
+//       );
+// };
 
 
-  
+//DELETE FUNCTION=========================================
+//remove employee by ID
 const removeEmployee = () => {
   console.log('Saying Bye Bye to your precious Employee...\n');
     inquirer
@@ -270,6 +246,7 @@ const removeEmployee = () => {
         if (err) throw err;
         console.log(`${res.affectedRows} employee eradicated!\n`);
         // Call readProducts AFTER the DELETE completes
+        console.table("Employee Removed:", res);
         viewEmployees();
       })
     });
