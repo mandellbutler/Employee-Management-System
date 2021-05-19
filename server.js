@@ -14,7 +14,7 @@ const startApp = () => {
       name: "userOptions",
       type: "list",
       message: "What would you like to do?",
-      choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Add Department", "Add Role", "Update Employee Role", "Remove Employee", "Remove Department", "Exit"]
+      choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Add Department", "Add Role", "Update Employee Role", "Remove Employee", "Remove Department", "Remove Role", "Exit"]
   })
   .then((answer) => {
     //switch case to determine next prompts or actions based on selected response
@@ -45,6 +45,9 @@ const startApp = () => {
         break;
       case "Remove Department":
         removeDepartment();
+        break;
+      case "Remove Role":
+        removeRole();
         break;
       case "Exit":
         exitApp();
@@ -280,6 +283,32 @@ const removeDepartment = () => {
         // Call readProducts AFTER the DELETE completes
         console.table("Department Removed:", res);
         viewDepartments();
+      })
+    });
+}; 
+
+const removeRole = () => {
+  console.log('Saying Bye Bye to your precious Role...\n');
+    inquirer
+        .prompt([
+          {
+            name: "removeRoleID",
+            type: "input",
+            message: "Please enter the ID of the Role you would like to remove:"
+          },
+        ])
+        .then((answer) => {
+    connection.query(
+      'DELETE FROM roles WHERE ?',
+      {
+        id: answer.removeRoleID,
+      },
+      (err, res) => {
+        if (err) throw err;
+        console.log(`${res.affectedRows} Role eradicated!\n`);
+        // Call readProducts AFTER the DELETE completes
+        console.table("Role Removed:", res);
+        viewRoles();
       })
     });
 }; 
