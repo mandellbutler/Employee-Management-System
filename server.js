@@ -14,7 +14,7 @@ const startApp = () => {
       name: "userOptions",
       type: "list",
       message: "What would you like to do?",
-      choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "Exit"]
+      choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Add Department", "Add Role", "Update Employee Role", "Exit"]
   })
   .then((answer) => {
     //switch case to determine next prompts or actions based on selected response
@@ -31,16 +31,19 @@ const startApp = () => {
       case "Add Employee":
         addEmployee();
         break;
+      case "Add Department":
+        addDepartment();
+        break;
+      case "Add Role":
+        addRole();
+        break;
+      case "Update Employee Role":
+        updateManager();
+        break;
       case "Remove Employee":
         removeEmployee();
         break;
-      case "Update Employee Role":
-        updateRole();
-        break;
-      case "Update Employee Manager":
-        updateManager();
-        break;
-      case "Update Employee Manager":
+      case "Exit":
         exitApp();
         break;
     }
@@ -129,6 +132,54 @@ const viewRoles = () => {
 
 //Create function==================================================
 
+//Add Role
+const addRole = () => {
+  console.log('Adding a new role...\n');
+  //prompt for adding new employee to table
+  inquirer
+    .prompt([
+      {
+        name: "roleName",
+        type: "input",
+        message: "What Role would you like to add?"
+      },
+      {
+        name: "lastName",
+        type: "input",
+        message: "What is the Employee's Last Name?"
+      },
+      {
+        name: "roleID",
+        type: "list",
+        message: "What is the Employee's Role ID",
+        choices: ["1", "2", "3", "4", "5", "6", "7"]
+      },
+      {
+        name: "managerID",
+        type: "list",
+        message: "What is the ID of the Employee's Manager?",
+        choices: ["1", "2", "3", "4"]
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        'INSERT INTO employees SET ?',
+        {
+          first_name: answer.firstName,
+          last_name: answer.lastName,
+          role_id: answer.roleID,
+          manager_id: answer.managerID,
+        },
+        (err, res) => {
+          if (err) throw err;
+          console.log(`${res.affectedRows} employee inserted!\n`);
+          // Call updateEmployee AFTER the INSERT completes
+          startApp();
+        });
+    });  
+};
+
+
 //Add Employee
 const addEmployee = () => {
   console.log('Adding a new employee...\n');
@@ -173,14 +224,7 @@ const addEmployee = () => {
           // Call updateEmployee AFTER the INSERT completes
           startApp();
         });
-      
-      
     });  
-  
-
-
-  // logs the actual query being run
-  // console.log(query.sql);
 };
 
 //TO REVISIT:
