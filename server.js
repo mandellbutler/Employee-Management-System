@@ -250,4 +250,4 @@ const removeEmployee = () => {
         viewEmployees();
       })
     });
-};
+}; 

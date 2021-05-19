@@ -23,3 +23,7 @@ SELECT employees.first_name AS FirstName, employees.last_name AS LastName, roles
 FROM employees RIGHT JOIN roles ON employees.role_id = role_id
 JOIN employees managers ON employees.manager_id = managers.id
 WHERE employees.manager_id = 2;
+
+SELECT first_name AS "First Name", last_name AS "Last Name", manager_id AS Manager
+FROM employees RIGHT JOIN roles ON employees.role_id = roles.id
+WHERE employees.manager_id = 2;
