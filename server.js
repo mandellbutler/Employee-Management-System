@@ -139,40 +139,33 @@ const addRole = () => {
   inquirer
     .prompt([
       {
-        name: "roleName",
+        name: "roleTitle",
         type: "input",
-        message: "What Role would you like to add?"
+        message: "What is the new Role's Title?"
       },
       {
-        name: "lastName",
+        name: "salary",
         type: "input",
-        message: "What is the Employee's Last Name?"
+        message: "What is the Role's salary?"
       },
       {
-        name: "roleID",
+        name: "deptID",
         type: "list",
-        message: "What is the Employee's Role ID",
-        choices: ["1", "2", "3", "4", "5", "6", "7"]
-      },
-      {
-        name: "managerID",
-        type: "list",
-        message: "What is the ID of the Employee's Manager?",
-        choices: ["1", "2", "3", "4"]
+        message: "Which Department will the new Role belong to?",
+        choices: ["1", "2", "3"]
       },
     ])
     .then((answer) => {
       connection.query(
-        'INSERT INTO employees SET ?',
+        'INSERT INTO roles SET ?',
         {
-          first_name: answer.firstName,
-          last_name: answer.lastName,
-          role_id: answer.roleID,
-          manager_id: answer.managerID,
+          title: answer.roleTitle,
+          salary: answer.salary,
+          department_id: answer.deptID,
         },
         (err, res) => {
           if (err) throw err;
-          console.log(`${res.affectedRows} employee inserted!\n`);
+          console.log(`${res.affectedRows} role inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
           startApp();
         });
