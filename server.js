@@ -14,7 +14,7 @@ const startApp = () => {
       name: "userOptions",
       type: "list",
       message: "What would you like to do?",
-      choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Add Department", "Add Role", "Update Employee Role", "Remove Employee", "Exit"]
+      choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Add Department", "Add Role", "Update Employee Role", "Remove Employee", "Remove Department", "Exit"]
   })
   .then((answer) => {
     //switch case to determine next prompts or actions based on selected response
@@ -42,6 +42,9 @@ const startApp = () => {
         break;
       case "Remove Employee":
         removeEmployee();
+        break;
+      case "Remove Department":
+        removeDepartment();
         break;
       case "Exit":
         exitApp();
@@ -132,7 +135,7 @@ const addEmployee = () => {
           if (err) throw err;
           console.log(`${res.affectedRows} employee inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
-          startApp();
+          viewEmployees();
         });
     });  
 };
@@ -159,7 +162,7 @@ const addDepartment = () => {
           if (err) throw err;
           console.log(`${res.affectedRows} department inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
-          startApp();
+          viewDepartments();
         });
     });  
 };
@@ -199,7 +202,7 @@ const addRole = () => {
           if (err) throw err;
           console.log(`${res.affectedRows} role inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
-          startApp();
+          viewRoles();
         });
     });  
 };
@@ -251,6 +254,32 @@ const removeEmployee = () => {
         // Call readProducts AFTER the DELETE completes
         console.table("Employee Removed:", res);
         viewEmployees();
+      })
+    });
+}; 
+
+const removeDepartment = () => {
+  console.log('Saying Bye Bye to your precious Department...\n');
+    inquirer
+        .prompt([
+          {
+            name: "removeDeptID",
+            type: "input",
+            message: "Please enter the ID of the Department you would like to remove:"
+          },
+        ])
+        .then((answer) => {
+    connection.query(
+      'DELETE FROM departments WHERE ?',
+      {
+        id: answer.removeDeptID,
+      },
+      (err, res) => {
+        if (err) throw err;
+        console.log(`${res.affectedRows} department eradicated!\n`);
+        // Call readProducts AFTER the DELETE completes
+        console.table("Department Removed:", res);
+        viewDepartments();
       })
     });
 }; 
