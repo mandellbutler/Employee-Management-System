@@ -50,7 +50,13 @@ const startApp = () => {
   })
 }
 //add start app before every break except on exit
-startApp();
+//confirm that connection has been established
+connection.connect((err) => {
+  if (err) throw err;
+  console.log(`connected as id ${connection.threadId}`);
+  startApp();
+});
+
 
 //read functions==================================================
 //View All Employees
@@ -126,7 +132,6 @@ const addEmployee = () => {
           if (err) throw err;
           console.log(`${res.affectedRows} employee inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
-          console.table("Employee Added!", res);
           startApp();
         });
     });  
@@ -154,7 +159,6 @@ const addDepartment = () => {
           if (err) throw err;
           console.log(`${res.affectedRows} department inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
-          console.table("Department Added!", res);
           startApp();
         });
     });  
@@ -195,7 +199,6 @@ const addRole = () => {
           if (err) throw err;
           console.log(`${res.affectedRows} role inserted!\n`);
           // Call updateEmployee AFTER the INSERT completes
-          console.table("Role Added!", res);
           startApp();
         });
     });  
