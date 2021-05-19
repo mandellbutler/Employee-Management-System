@@ -210,24 +210,24 @@ const addRole = () => {
     });  
 };
 
-//UPDATE FUNCTIONS======================================
+//UPDATE FUNCTIONS======================================Needs re-working
 // const updateEmployeeRole = () => {
 //   console.log('Updating Employees Table...\n');
 //       const query = connection.query(
 //         'UPDATE employee SET ? WHERE ?',
 //         [
 //           {
-//             roleID: 100,
+//             id: '',
 //           },
 //           {
-//             flavor: 'Rocky Road',
+//             title: 'Busser',
 //           },
 //         ],
 //         (err, res) => {
 //           if (err) throw err;
 //           console.log(`${res.affectedRows} employees updated!\n`);
-//           // Call deleteProduct AFTER the UPDATE completes
-//           deleteProduct();
+//           // Call removeEmployee AFTER the UPDATE completes
+//           removeEmployee();
 //         }
 //       );
 // };
