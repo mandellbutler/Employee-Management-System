@@ -49,33 +49,13 @@ const startApp = () => {
 //add start app before every break except on exit
 startApp();
 
-         
-            //userOptions
-            //list
-            //Choices:
-                      //====CASE======//
-                //View All Employees
-
                       //====CASE======//
                 //View All Employees By Department
 
                       //====CASE======//
                 //View All Employees By Manager
 
-                      //====CASE======//
-                //Add Employee
-                    //What is the Employee's First Name?
-                        //Input
-                        //firstName
-                    //What is the Employee's Last Name?
-                        //Input
-                        //lastName
-                    //What is the Employee's Role?
-                        //empRole
-                        //List
-                        //Choices:
-                            //User is Presented With List of ALL ROLES
-                            //Manager, deptartment, and salary are assigned based on ROLE choice
+                      
 
                       //====CASE======//
                 //Remove Employee
@@ -118,6 +98,7 @@ startApp();
 //user is presented with an 'Ascee' start/welcome screen
 
 //read functions==================================================
+//View All Employees
 const viewEmployees = () => {
   connection.query('SELECT first_name AS "First Name", last_name AS "Last Name", role_id AS "Role ID", manager_id AS "Manager ID" FROM employees', (err, res) => {
     if (err) throw err;
@@ -126,7 +107,7 @@ const viewEmployees = () => {
     startApp();
   });
 };
-
+//View All Departments
 const viewDepartments = () => {
   connection.query('SELECT departments.id AS "Dept. ID", dept_name AS "Department" FROM departments', (err, res) => {
     if (err) throw err;
@@ -135,7 +116,7 @@ const viewDepartments = () => {
     startApp();
   });
 };
-
+//View All Roles
 const viewRoles = () => {
   connection.query('SELECT roles.id AS "Role ID", roles.title AS "Role", roles.salary AS "Salary", roles.department_id AS "Dept. ID" FROM roles', (err, res) => {
     if (err) throw err;
@@ -146,6 +127,70 @@ const viewRoles = () => {
 };
 
 
+//Create function==================================================
+
+//Add Employee
+const addEmployee = () => {
+  console.log('Adding a new employee...\n');
+  //prompt for adding new employee to table
+  inquirer
+    .prompt([
+      {
+        name: "firstName",
+        type: "input",
+        message: "What is the Employee's First Name?"
+      },
+      {
+        name: "lastName",
+        type: "input",
+        message: "What is the Employee's Last Name?"
+      },
+      {
+        name: "roleID",
+        type: "list",
+        message: "What is the Employee's Role ID",
+        choices: ["1", "2", "3", "4", "5", "6", "7"]
+      },
+      {
+        name: "managerID",
+        type: "list",
+        message: "What is the ID of the Employee's Manager?",
+        choices: ["1", "2", "3", "4"]
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        'INSERT INTO employees SET ?',
+        {
+          first_name: answer.firstName,
+          last_name: answer.lastName,
+          role_id: answer.roleID,
+          manager_id: answer.managerID,
+        },
+        (err, res) => {
+          if (err) throw err;
+          console.log(`${res.affectedRows} employee inserted!\n`);
+          // Call updateEmployee AFTER the INSERT completes
+          startApp();
+        });
+      
+      
+    });  
+  
+
+
+  // logs the actual query being run
+  // console.log(query.sql);
+};
+
+//TO REVISIT:
+
+//What is the Employee's Role?
+        //empRole
+        //List
+        //Choices:
+            //User is Presented With List of ALL ROLES
+            //Manager, deptartment, and salary are assigned based on ROLE choice
 
 
 // const readManagers = () => {
@@ -161,15 +206,7 @@ const viewRoles = () => {
 
 //============C.R.U.D
 
-// const readProducts = () => {
-//     console.log('Selecting all products...\n');
-//     connection.query('SELECT * FROM products', (err, res) => {
-//       if (err) throw err;
-//       // Log all results of the SELECT statement
-//       console.log(res);
-//       connection.end();
-//     });
-//   };
+
   
 //   const deleteProduct = () => {
 //     console.log('Deleting all strawberry icecream...\n');
@@ -187,10 +224,10 @@ const viewRoles = () => {
 //     );
 //   };
   
-//   const updateProduct = () => {
-//     console.log('Updating all Rocky Road quantities...\n');
+//   const updateEmployee = () => {
+//     console.log('Updating Employees Table...\n');
 //     const query = connection.query(
-//       'UPDATE products SET ? WHERE ?',
+//       'UPDATE employee SET ? WHERE ?',
 //       [
 //         {
 //           quantity: 100,
@@ -210,27 +247,7 @@ const viewRoles = () => {
 //     // logs the actual query being run
 //     console.log(query.sql);
 //   };
-  
-//   const createProduct = () => {
-//     console.log('Inserting a new product...\n');
-//     const query = connection.query(
-//       'INSERT INTO products SET ?',
-//       {
-//         flavor: 'Rocky Road',
-//         price: 3.0,
-//         quantity: 50,
-//       },
-//       (err, res) => {
-//         if (err) throw err;
-//         console.log(`${res.affectedRows} product inserted!\n`);
-//         // Call updateProduct AFTER the INSERT completes
-//         updateProduct();
-//       }
-//     );
-  
-//     // logs the actual query being run
-//     console.log(query.sql);
-//   };
+
   
 //   // Connect to the DB
 //   connection.connect((err) => {
