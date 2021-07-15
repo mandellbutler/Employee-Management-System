@@ -1,7 +1,7 @@
 # Employee Management System
 
 # Description
-Th Employee Management System allows business owners to manage the department, roles, and employees in a company so that they can better organize and plan their business.
+Employees are the cornerstone to an organization's success. However, the degree to which an organization will succeed is highly dependent upon their ability to smoothly and effectively manage, monitor, and communicate with their employees. This Employee Management System is a web application that facilitates the employee-management process, allowing for increased workflow and business functionality. With this innovative system, time and resource consuming tasks, such as onboarding and file management, are performed in minutes! 
 
 # Installation
 To install, simply clone the Github repository and add it to your local repo via your choice code-editing software (ie Visual Studio Code).
